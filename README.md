@@ -2,6 +2,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+Sir you need to install npm , mongodb, mongoose, openai
+
 First, run the development server:
 
 ```bash
