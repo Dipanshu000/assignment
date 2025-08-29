@@ -1,4 +1,3 @@
-// chatapp/app/api/ask/route.ts
 import { NextResponse } from "next/server";
 import { generateAnswer } from "@/lib/qa";
 import { saveExchange } from "@/lib/db";
@@ -12,10 +11,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "No question provided" }, { status: 400 });
     }
 
-    // Generate answer
     const answer = await generateAnswer(question);
     
-    // Save to MongoDB
     await saveExchange(question, answer);
 
     return NextResponse.json({ answer });

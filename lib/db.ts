@@ -1,4 +1,3 @@
-// chatapp/lib/db.ts
 import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI || "";
@@ -33,7 +32,6 @@ async function connectDB() {
   return cached.conn;
 }
 
-// Define schema
 const ExchangeSchema = new mongoose.Schema(
   {
     question: String,
@@ -43,7 +41,6 @@ const ExchangeSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Get or create model
 async function getExchangeModel() {
   const conn = await connectDB();
   return conn.models.Exchange || conn.model("Exchange", ExchangeSchema);

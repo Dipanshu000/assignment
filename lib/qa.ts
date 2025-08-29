@@ -1,7 +1,5 @@
-// chatapp/lib/qa.ts
 import OpenAI from "openai";
 
-// Create OpenAI instance with proper error handling
 let openai: OpenAI | null = null;
 
 try {
@@ -15,7 +13,6 @@ try {
 }
 
 export async function generateAnswer(question: string): Promise<string> {
-  // Try OpenAI first if available
   if (openai) {
     try {
       const response = await openai.chat.completions.create({
@@ -35,18 +32,15 @@ export async function generateAnswer(question: string): Promise<string> {
       if (answer) return answer;
     } catch (err: any) {
       console.error("OpenAI API error:", err.message || err);
-      // Fall through to local answers
     }
   }
 
-  // Local fallback answers for common questions
   return getLocalAnswer(question);
 }
 
 function getLocalAnswer(question: string): string {
   const q = question.toLowerCase();
   
-  // React questions
   if (q.includes('react') || q.includes('what is react')) {
     return "React is a JavaScript library for building user interfaces, particularly web applications. It allows you to create reusable UI components and efficiently update and render them when data changes.\n\nKey features:\n- Component-based architecture\n- Virtual DOM for performance\n- JSX syntax for writing HTML in JavaScript\n- Unidirectional data flow\n- Hooks for state and lifecycle management\n\nExample of a simple React component:\n```jsx\nfunction Welcome(props) {\n  return <h1>Hello, {props.name}!</h1>;\n}\n```";
   }
@@ -67,6 +61,5 @@ function getLocalAnswer(question: string): string {
     return "Next.js is a React framework that enables server-side rendering, static site generation, and other performance optimizations out of the box.\n\nKey features:\n- Server-side rendering (SSR)\n- Static site generation (SSG)\n- File-based routing\n- API routes\n- Built-in CSS and Sass support\n- Image optimization\n\nExample page structure:\n```\npages/\n  index.js       → /\n  about.js       → /about\n  blog/[slug].js → /blog/hello-world\n```";
   }
   
-  // Default answer for unknown questions
   return "I specialize in JavaScript, React, and Next.js questions. Could you ask something related to these technologies? For example:\n- 'What are React hooks?'\n- 'How does Next.js routing work?'\n- 'What is the virtual DOM?'\n- 'How to optimize React performance?'";
 }
